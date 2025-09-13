@@ -87,7 +87,7 @@ app.get('/api/v1/brain/:sharelink',(req,res)=>{
 })
 
 async function main(){
-   await mongoose.connect('mongodb+srv://admin:uQw7XwTV7JXonHQn@cluster0.95g7hme.mongodb.net/brainly')
+   await mongoose.connect('')//write your mongoDB url
    console.log("Connected")
    app.listen(3000);
 }
