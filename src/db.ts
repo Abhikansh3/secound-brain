@@ -12,4 +12,4 @@ const contentSchema = new Schema({
     userId:{type:mongoose.Types.ObjectId, ref:'User'}
 })
 export const UserModel =  model("User",UserSchema)
-export const contentModel = model('Content',contentSchema)
+export const ContentModel = model('Content',contentSchema)
