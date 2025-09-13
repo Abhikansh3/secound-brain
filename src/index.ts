@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 import { contentModel, UserModel } from "./db.js";
 import {JWT_PASSWORD} from './config.js'
 import { userMiddleware } from "./middleware.js";
+import  mongoose  from "mongoose";
 const app = express()
 app.use(express.json())
 app.post('/api/v1/signup',async(req,res) => {
@@ -16,7 +17,7 @@ app.post('/api/v1/signup',async(req,res) => {
         password:password
     })
     res.json({
-        meg:"User signed up"
+        msg:"User signed up"
     })
     } catch(e){
         res.status(411).json({
@@ -71,4 +72,10 @@ app.post('/api/v1/brain/share',(req,res)=>{
 app.get('/api/v1/brain/:sharelink',(req,res)=>{
 
 })
-app.listen(3000)
+
+async function main(){
+   await mongoose.connect('mongodb+srv://admin:uQw7XwTV7JXonHQn@cluster0.95g7hme.mongodb.net/brainly')
+   console.log("Connected")
+   app.listen(3000);
+}
+main()
