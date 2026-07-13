@@ -1,8 +1,9 @@
 import express from "express";
-import { ContentModel, UserModel } from "./db.js";
+import { ContentModel, LinkModel, UserModel } from "./db.js";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "./config.js";
 import { userMiddleware } from "./middleware.js";
+import { randomString } from "./utlis.js";
 const app = express()
 
 app.use(express.json());
@@ -94,6 +95,66 @@ app.delete('/api/v1/content', userMiddleware, async (req, res) => {
   })
 })
 
+app.post('/api/v1/brain/share', userMiddleware, async (req, res) => {
+  const share = req.body.share
+  if (share) {
 
+    const existingLink = await LinkModel.findOne({
+      //@ts-ignore
+      userId: req.userId,
+    })
+    if (existingLink) {
+      res.json({
+        hash: existingLink.hash
+      })
+      return;
+    }
+    const hash = randomString(10);
+    await LinkModel.create({
+      //@ts-ignore
+      userId: req.userId,
+      hash: hash,
+    })
+    res.json({
+      message: hash
+    })
 
+  } else {
+    await LinkModel.deleteOne({
+      //@ts-ignore
+      userId: req.userId
+    })
+  }
+})
+app.get('/api/v1/brain/:shareLink', async (req, res) => {
+  const hash = req.params.shareLink;
+  const link = await LinkModel.findOne({
+    hash: hash
+  })
+  if (!link || !link.userId) {
+    res.status(404).json({
+      message: "Link not found"
+    })
+    return;
+  }
+
+  const content = await ContentModel.find({
+    userId: link.userId
+  });
+  const user = await UserModel.findOne({
+    _id: link.userId
+  })
+  if (!user) {
+    res.status(404).json({
+      message: "User not found"
+    })
+    return;
+  }
+
+  res.json({
+    username: user.username,
+    content: content
+  })
+
+})
 app.listen(3000)
