@@ -1,12 +1,17 @@
 import './App.css'
+import { Button } from './components/Button'
+import { Plusicon } from './icons/Plusicon'
+import { ShareIcon } from './icons/ShareIcon'
 
 function App() {
 
   return (
     <>
-      <div className='bg-amber-50'>
-        hi there
+      <div>
+        <Button variant='primary' text='Add Content' startIcon={Plusicon()} />
+        <Button variant='secondary' text='share Brain' startIcon={<ShareIcon />} />
       </div>
+
     </>
   )
 }
