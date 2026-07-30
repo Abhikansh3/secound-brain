@@ -4,6 +4,7 @@ interface Buttonprops {
   variant: 'primary' | 'secondary';
   text: string;
   startIcon?: ReactElement;
+  onClick?: () => void;
 }
 
 const variantClasses = {
@@ -13,8 +14,8 @@ const variantClasses = {
 const deafultclasses = "cursor-pointer flex px-4 py-2 rounded-md font-light hover:opacity-80 transition-opacity duration-300 justify-center items-center gap-2"
 
 
-export function Button({ variant, text, startIcon }: Buttonprops) {
-  return <button className={variantClasses[variant] + " " + deafultclasses}>
+export function Button({ variant, text, startIcon, onClick }: Buttonprops) {
+  return <button onClick={onClick} className={variantClasses[variant] + " " + deafultclasses}>
     {startIcon}
     {text}
   </button>
