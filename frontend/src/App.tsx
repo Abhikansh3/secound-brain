@@ -6,7 +6,7 @@ import { Card } from './components/Card'
 import { CreateContentModal } from './components/CreateContentModal'
 import { useState } from 'react'
 function App() {
-  const [modalOpen, setModalOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
   return (
     <>
       <CreateContentModal open={modalOpen} onClose={() => {

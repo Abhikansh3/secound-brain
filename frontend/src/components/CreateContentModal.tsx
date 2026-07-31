@@ -1,4 +1,5 @@
 import { CrossIcon } from "../icons/CrossIcon";
+import { Button } from "./Button";
 
 export function CreateContentModal({ open, onClose }: { open: any, onClose: any }) {
   return (
@@ -8,14 +9,15 @@ export function CreateContentModal({ open, onClose }: { open: any, onClose: any 
 
         <div className="bg-white p-6 rounded-md flex flex-col gap-4">
 
-          <div className="flex justify-end" onClick={onClose}>
+          <div className="flex justify-end cursor-pointer" onClick={onClose}>
             <CrossIcon />
           </div>
           <div className="flex flex-col gap-2">
             <Input placeholder="Title" />
             <Input placeholder="Link" />
           </div>
-
+          <div className="flex justify-center">
+            <Button variant="primary" text="Submit" /> </div>
         </div>
 
       </div>}
