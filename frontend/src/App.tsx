@@ -5,27 +5,30 @@ import { ShareIcon } from './icons/ShareIcon'
 import { Card } from './components/Card'
 import { CreateContentModal } from './components/CreateContentModal'
 import { useState } from 'react'
+import { Sidebar } from './components/Sidebar'
 function App() {
   const [modalOpen, setModalOpen] = useState(false)
   return (
-    <>
-      <CreateContentModal open={modalOpen} onClose={() => {
-        setModalOpen(false)
-      }} />
-      <div className='flex flex-col gap-4 p-4'>
-        <div className='flex justify-end gap-2'>
-          <Button variant='primary' text='Add Content' startIcon={Plusicon()} onClick={() => {
-            setModalOpen(true)
-          }} />
-          <Button variant='secondary' text='share Brain' startIcon={<ShareIcon />} />
-        </div>
-        <div className='flex gap-2'>
-          <Card title='hello' type='youtube' link='https://www.youtube.com/watch?v=tL9Lw250spc' />
-          <Card title='hello' type='twitter' link='https://x.com/incentivising/status/2081674449925931467' />
+    <div className='flex h-screen w-screen'>
+      <div className=''><Sidebar /></div>
+      <div className='w-full bg-gray-100'>
+        <CreateContentModal open={modalOpen} onClose={() => {
+          setModalOpen(false)
+        }} />
+        <div className='flex flex-col gap-4 p-4'>
+          <div className='flex justify-end gap-2'>
+            <Button variant='primary' text='Add Content' startIcon={Plusicon()} onClick={() => {
+              setModalOpen(true)
+            }} />
+            <Button variant='secondary' text='share Brain' startIcon={<ShareIcon />} />
+          </div>
+          <div className='flex gap-2'>
+            <Card title='hello' type='youtube' link='https://www.youtube.com/watch?v=tL9Lw250spc' />
+            <Card title='hello' type='twitter' link='https://x.com/incentivising/status/2081674449925931467' />
+          </div>
         </div>
       </div>
-
-    </>
+    </div>
   )
 }
 
